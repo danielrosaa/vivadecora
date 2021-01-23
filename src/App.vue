@@ -1,15 +1,18 @@
 <template>
   <div class="app">
+		<Navbar class="navbar" />
     <Drawer ref="drawer" class="drawer" />
     <router-view ref="view" class="view"/>
   </div>
 </template>
 <script>
 import Drawer from '@/components/Drawer'
+import Navbar from '@/components/Navbar'
 import { mapGetters } from 'vuex'
 export default {
   components: {
-    Drawer
+    Drawer,
+    Navbar
   },
   computed: {
     ...mapGetters({ drawer: 'estados/getDrawer' })
@@ -34,7 +37,15 @@ export default {
 
 .app {
   height: 100vh;
-  transition: all;
+  display: flex;
+  flex-direction: column;
+  background-image: $gradient;
+}
+
+.navbar {
+}
+
+.view {
 }
 
 .drawer {

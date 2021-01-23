@@ -3,7 +3,6 @@
 		<div class="bg-imagem-dinamica">
 			<img :src="`https://image.tmdb.org/t/p/original${poster}`" />
 		</div>
-		<Navbar />
 		<CardFilme ref="cardFilme" :filme="naoCurados[0]" />
 		<!-- <div class="lista">
 			<CardFilme v-for="filme in naoCurados" :key="filme.id" :filme="filme" class="lista__filme" />
@@ -15,14 +14,12 @@
 </template>
 
 <script>
-import Navbar from "@/components/Navbar"
 import CardFilme from "@/components/CardFilme"
 import BotoesControle from "@/components/BotoesControle"
 import ModalSinopse from "@/components/ModalSinopse"
 import { mapGetters, mapActions } from "vuex"
 export default {
 	components: {
-		Navbar,
 		CardFilme,
 		BotoesControle,
 		ModalSinopse
@@ -74,12 +71,12 @@ export default {
 	padding: 20px;
 	display: flex;
 	flex-direction: column;
-	justify-content: space-between;
+	justify-content: space-around;
 	position: relative;
 	background-repeat: no-repeat;
 	background-size: cover;
 	background-position: center;
-	background-image: $gradient;
+	// background-image: $gradient;
 	overflow-x: hidden;
 }
 

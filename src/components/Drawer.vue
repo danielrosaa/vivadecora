@@ -1,13 +1,13 @@
 <template>
 	<div>
-		<div @click="$store.dispatch('estados/setDrawer', !drawer)" class="fechar">X</div>
-		<router-link tag="div" to="/" class="drawer__links v-gutter-sm">
+		<div @click="fechaDrawer" class="fechar">X</div>
+		<router-link @click.native="fechaDrawer" tag="div" to="/" class="drawer__links v-gutter-sm">
 			Filmes não curados
 		</router-link>
-		<router-link tag="div" to="/likes" class="drawer__links v-gutter-sm">
+		<router-link @click.native="fechaDrawer" tag="div" to="/likes" class="drawer__links v-gutter-sm">
 			Filmes curtidos
 		</router-link>
-		<router-link tag="div" to="/dislikes" class="drawer__links v-gutter-sm">
+		<router-link @click.native="fechaDrawer" tag="div" to="/dislikes" class="drawer__links v-gutter-sm">
 			Filmes não curtidos
 		</router-link>
 	</div>
@@ -18,6 +18,11 @@ import { mapGetters } from 'vuex'
 export default {
   computed: {
     ...mapGetters({ drawer: 'estados/getDrawer' })
+  },
+  methods: {
+    fechaDrawer() {
+      this.$store.dispatch('estados/setDrawer', !this.drawer)
+    }
   }
 }
 </script>

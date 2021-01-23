@@ -21,13 +21,19 @@ export default {
 
 <style lang="scss" scoped>
 .nav {
-  display: flex;
+  width: 100%;
+  padding: 24px;
+  box-sizing: border-box;
+  display: inline-flex;
   justify-content: center;
   align-items: center;
-  position: relative;
+  margin: 0 auto;
+  position: absolute;
+  z-index: 1;
   &__menu {
     position: absolute;
-    left: 0;
+    left: 20px;
+    //
   }
   &__logo {
     //
