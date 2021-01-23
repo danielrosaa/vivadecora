@@ -1,13 +1,13 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-import teste from './teste'
+import filmes from './filmes'
 
 Vue.use(Vuex)
 
 export default function () {
     const Store = new Vuex.Store({
         modules: {
-            teste
+            filmes
         }
     })
 
