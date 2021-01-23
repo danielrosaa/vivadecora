@@ -1,11 +1,16 @@
 <template>
 	<div class="home">
 		<div class="bg-imagem-dinamica">
-			<img :src="`https://image.tmdb.org/t/p/original${poster}`">
+			<img :src="`https://image.tmdb.org/t/p/original${poster}`" />
 		</div>
 		<Navbar />
-		<CardFilme :filme="naoCurados[0]" />
-		<BotoesControle v-show="naoCurados.length > 0" :filme="naoCurados[0]" />
+		<CardFilme ref="cardFilme" :filme="naoCurados[0]" />
+		<!-- <div class="lista">
+			<CardFilme v-for="filme in naoCurados" :key="filme.id" :filme="filme" class="lista__filme" />
+		</div> -->
+		<BotoesControle :filme="naoCurados[0]" />
+
+		<ModalSinopse v-if="sinopse" :filme="naoCurados[0]" />
 	</div>
 </template>
 
@@ -13,17 +18,27 @@
 import Navbar from "@/components/Navbar"
 import CardFilme from "@/components/CardFilme"
 import BotoesControle from "@/components/BotoesControle"
-import { mapGetters, mapActions } from 'vuex'
+import ModalSinopse from "@/components/ModalSinopse"
+import { mapGetters, mapActions } from "vuex"
 export default {
 	components: {
 		Navbar,
 		CardFilme,
 		BotoesControle,
+		ModalSinopse
 	},
 	computed: {
-		...mapGetters({ naoCurados: 'filmes/getNaoCurados' }),
+		...mapGetters({
+			naoCurados: "filmes/getNaoCurados",
+			sinopse: "estados/getSinopse"
+			}),
 		poster() {
-			return this.naoCurados[0] ? this.naoCurados[0].poster_path : ''
+			return this.naoCurados[0] ? this.naoCurados[0].poster_path : ""
+		},
+	},
+	data() {
+		return {
+			animacao: true
 		}
 	},
 	mounted() {
@@ -33,10 +48,11 @@ export default {
 		async getLista() {
 			const { data } = await this.$axios.get("/list/7073183")
 			this.setNaoCurados(data.results)
+			console.log(data.results)
 		},
 
 		// Store Actions
-		...mapActions({ setNaoCurados: 'filmes/setNaoCurados' })
+		...mapActions({ setNaoCurados: "filmes/setNaoCurados" }),
 	},
 }
 </script>
@@ -71,4 +87,17 @@ export default {
 		opacity: 0.1;
 	}
 }
+
+// .lista {
+// 	position: relative;
+// 	display: flex;
+// 	justify-content: center;
+// 	align-items: center;
+// 	width: 100%;
+// 	height: 100%;
+// 	&__filme {
+// 		position: absolute;
+// 		z-index: 1;
+// 	}
+// }
 </style>

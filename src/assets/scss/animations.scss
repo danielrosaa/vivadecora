@@ -1,0 +1,12 @@
+@keyframes dislike {
+  0% {}
+  100% {
+    transform: translateX(20px);
+    transform: rotate(-33deg);
+    opacity: 0;
+  }
+}
+
+.animate--dislike {
+  animation: dislike 500ms;
+}

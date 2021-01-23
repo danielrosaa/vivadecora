@@ -1,10 +1,20 @@
 <template>
 	<section class="controle">
-		<button @click="dislike" class="btn btn--round">
+		<button
+			@click="dislike"
+			class="btn btn--round"
+			:disabled="naoCurados.length === 0"
+		>
 			<img src="@/assets/img/n-curti.png" alt="Ícone de curtir" />
 		</button>
-		<button @click="pular" class="btn">Pular</button>
-		<button @click="like" class="btn btn--round">
+		<button @click="pular" class="btn" :disabled="naoCurados.length === 0">
+			Pular
+		</button>
+		<button
+			@click="like"
+			class="btn btn--round"
+			:disabled="naoCurados.length === 0"
+		>
 			<img src="@/assets/img/curti.png" alt="Ícone de descurtir" />
 		</button>
 	</section>
@@ -27,13 +37,12 @@ export default {
 		},
 		pular() {
 			this.setNaoCurados({filme: this.$props.filme, acao: 'pular'})
-			console.log("clicou pular")
 		},
 		like() {
 			this.setCurtidos(this.$props.filme)
 			this.setNaoCurados({filme: this.$props.filme, acao: 'remover'})
     },
-    
+
     // Store Actions
     ...mapActions({
         setNaoCurados: 'filmes/setNaoCurados',

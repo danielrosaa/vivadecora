@@ -1,0 +1,153 @@
+<template>
+  <div class="modal">
+    <div class="modal__card">
+      <div class="modal__header">
+        <div class="modal__image">
+          <img :src="`https://image.tmdb.org/t/p/original${filme.poster_path}`" alt="Poster do filme">
+        </div>
+        <div @click="$store.dispatch('estados/setSinopse', false)" class="modal__fechar">X</div>
+      </div>
+      <div class="modal__content">
+        <div class="modal__titulo v-gutter-sm">{{filme.title || filme.name}}</div>
+        <div class="modal__info v-gutter-sm">2017 - FANTASY/SCIENCE FICTION FILM - 2H 21M</div>
+        <div class="modal__avaliacao v-gutter-sm">
+          <div class="modal__fav">
+            <div class="modal__coracoes">
+              <img
+                v-for="n in 4"
+                :key="n"
+                src="@/assets/img/favorite.png"
+                alt="Ícone de favorito"
+              />
+              <img src="@/assets/img/favorite_.png" alt="Ícone de favorito" style="filter: invert()" />
+            </div>
+            <div class="modal__avaliacoes">
+              ({{ filme.vote_count }} avaliações)
+            </div>
+          </div>
+        </div>
+        <div class="modal__sinopse v-gutter-sm">{{filme.overview}}</div>
+      </div>
+    </div>
+  </div>
+</template>
+
+<script>
+export default {
+  props: {
+    filme: Object
+  }
+  
+}
+</script>
+
+<style lang="scss" scoped>
+.modal {
+  box-sizing: border-box;
+  overflow: hidden;
+  width: 100vw;
+  height: 100vh;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: grid;
+  place-items: center;
+  z-index: 9999;
+
+  &__card {
+    width: 80%;
+    height: 80%;
+    display: flex;
+    flex-direction: column;
+    background: #fff;
+    border-radius: 8px;
+    // overflow: hidden;
+  }
+  &__header {
+    border-top-right-radius: 8px;
+    border-top-left-radius: 8px;
+    flex: 1;
+    background-color: $secondary;
+    position: relative;
+  }
+  &__image {
+    position: absolute;
+    left: 50%;
+    top: 20%;
+    transform: translateX(-50%);
+
+    img {
+      border-radius: 5px;
+      width: auto;
+      height: 150px;
+    }
+  }
+
+  &__fechar {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: #FFF;
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    display: grid;
+    place-items: center;
+    font-size: 1.5rem;
+    font-weight: 500;
+    color: #666;
+  }
+
+  &__content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    overflow-y: auto;
+    flex: 4;
+    padding: 24px;
+    margin-top: 25%;
+    color: #666;
+  }
+
+	&__titulo {
+		text-transform: uppercase;
+		font-size: 1.4rem;
+    font-weight: 900;
+  }
+
+  &__fav {
+    display: flex;
+    flex-direction: column;
+		align-content: center;
+		margin: 16px 0;
+		color: $cardTextColor;
+    text-align: center;
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: #999;
+	}
+
+  &__coracoes {
+		img {
+			width: 20px;
+      height: 20px;
+      &:not(:last-child) {
+        margin-right: 8px;
+      }
+		}
+  }
+  
+	&__info {
+    text-transform: uppercase;
+    text-align: center;
+    font-weight: 500;
+		color: #999;
+  }
+
+  &__sinopse {
+    line-height: 24px;
+    font-weight: 500;
+  }
+}
+</style>

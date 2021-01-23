@@ -3,7 +3,7 @@
 		<div v-if="naoCurados.length > 0" class="card">
 			<div class="card__img" :style="cardBackground" />
 			<div class="card__info">
-				<div class="card__title">{{filme.title || filme.name }}</div>
+				<div class="card__title">{{ filme.title || filme.name }}</div>
 				<div class="card__fav">
 					<div class="card__coracoes">
 						<img
@@ -15,35 +15,37 @@
 						<img src="@/assets/img/favorite_.png" alt="Ícone de favorito" />
 					</div>
 					<div class="card__avaliacoes">
-						({{filme.vote_count}} avaliações)
+						({{ filme.vote_count }} avaliações)
 					</div>
 				</div>
 				<div class="card__sinopse">
 					<div>
-						{{filme.overview}}
+						{{ filme.overview }}
 					</div>
 					<div>
-						<a href="#">Ver Sinopse</a>
+						<a @click="$store.dispatch('estados/setSinopse', true)">Ver Sinopse</a>
 					</div>
 				</div>
 			</div>
 		</div>
 		<div v-else class="card__sem-filme">
 			<div class="card__title">Sem filmes para votar</div>
-			<img src="@/assets/img/video-camera-vazio.png" alt="Sem filmes votar">
+			<img src="@/assets/img/video-camera-vazio.png" alt="Sem filmes votar" />
 		</div>
 	</section>
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
+import { mapGetters } from "vuex"
 export default {
 	name: "Filme",
 	props: {
-		filme: Object
+		filme: Object,
 	},
 	computed: {
-		...mapGetters({ naoCurados: 'filmes/getNaoCurados' }),
+		...mapGetters({
+			naoCurados: "filmes/getNaoCurados",
+		}),
 		cardBackground() {
 			if (this.$props.filme) {
 				return `
@@ -52,7 +54,6 @@ export default {
 			} else {
 				return `
 						background-image: linear-gradient(to top, rgba(66, 66, 66, 0.99), rgba(0, 0, 0, 0))`
-
 			}
 		}
 	}
@@ -60,6 +61,9 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.filmes {
+	transition: all;
+}
 .card {
 	width: 100%;
 	max-width: 294px;
@@ -141,4 +145,14 @@ export default {
 	}
 }
 
+// .swipe-enter-active {
+//   transition: all 1s ease;
+// }
+// .swipe-leave-active {
+//   transition: all .8s cubic-bezier(1.0, 0.5, 0.8, 1.0);
+// }
+// .swipe-leave-to {
+//   transform: translateY(10px);
+//   opacity: 0;
+// }
 </style>

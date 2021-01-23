@@ -1,5 +1,6 @@
 @import './variables';
 @import './typography';
+@import './animations';
 
 body {
   padding: 0;
@@ -12,6 +13,10 @@ a {
   font-weight: lighter;
 }
 
+.v-gutter-sm {
+  margin: $v-gutter-sm 0;
+}
+
 .btn {
   background: #FFF;
   text-transform: uppercase;
@@ -20,9 +25,24 @@ a {
   border: 0;
   font-family: 'Open Sans', sans-serif;
   outline: 0;
+  transition: 300ms all;
   &:not(.btn--round) {
     min-width: 80px;
     font-weight: 700;
+  }
+
+  &:active {
+    box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.5);
+  }
+
+  &:hover {
+    box-shadow: 0 0 15px 5px rgba($color: $primary, $alpha: 0.7);
+    transform: scale(1.05);
+  }
+
+  &:disabled {
+    opacity: 0.5;
+    pointer-events: none;
   }
 
   &--round {
