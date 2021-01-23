@@ -19,6 +19,7 @@ a {
   border-radius: 100px;
   border: 0;
   font-family: 'Open Sans', sans-serif;
+  outline: 0;
   &:not(.btn--round) {
     min-width: 80px;
     font-weight: 700;

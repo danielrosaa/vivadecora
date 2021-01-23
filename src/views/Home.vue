@@ -1,17 +1,11 @@
 <template>
 	<div class="home">
 		<div class="bg-imagem-dinamica">
-			<img :src="`https://image.tmdb.org/t/p/original${this.lista.poster_path}`">
+			<img :src="`https://image.tmdb.org/t/p/original${poster}`">
 		</div>
 		<Navbar />
-		<CardFilme :filme="lista" />
-		<!-- <CardFilme
-			v-for="filme in lista"
-			:key="filme.id"
-			:filme="filme"
-			class="stack"
-		/> -->
-		<BotoesControle />
+		<CardFilme :filme="naoCurados[0]" />
+		<BotoesControle v-show="naoCurados.length > 0" :filme="naoCurados[0]" />
 	</div>
 </template>
 
@@ -19,7 +13,7 @@
 import Navbar from "@/components/Navbar"
 import CardFilme from "@/components/CardFilme"
 import BotoesControle from "@/components/BotoesControle"
-import { mapGetters } from "vuex"
+import { mapGetters, mapActions } from 'vuex'
 export default {
 	components: {
 		Navbar,
@@ -27,17 +21,9 @@ export default {
 		BotoesControle,
 	},
 	computed: {
-		...mapGetters({ access_token: "token/getToken" }),
-		cardBackground() {
-			return `
-					background-image: url(https://image.tmdb.org/t/p/original${this.lista.poster_path});
-      `
-		},
-	},
-	data() {
-		return {
-			poster: "",
-			lista: {},
+		...mapGetters({ naoCurados: 'filmes/getNaoCurados' }),
+		poster() {
+			return this.naoCurados[0] ? this.naoCurados[0].poster_path : ''
 		}
 	},
 	mounted() {
@@ -46,9 +32,11 @@ export default {
 	methods: {
 		async getLista() {
 			const { data } = await this.$axios.get("/list/7073183")
-			this.lista = data.results[0]
-			console.log(this.lista)
+			this.setNaoCurados(data.results)
 		},
+
+		// Store Actions
+		...mapActions({ setNaoCurados: 'filmes/setNaoCurados' })
 	},
 }
 </script>
@@ -66,6 +54,7 @@ export default {
 	background-size: cover;
 	background-position: center;
 	background-image: $gradient;
+	overflow-x: hidden;
 }
 
 .bg-imagem-dinamica {
@@ -75,7 +64,6 @@ export default {
 	left: 50%;
 	margin-right: -50%;
 	transform: translate(-50%, -50%);
-	
 
 	img {
 		width: auto;

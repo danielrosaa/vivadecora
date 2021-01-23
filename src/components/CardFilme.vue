@@ -1,6 +1,6 @@
 <template>
 	<section class="filmes">
-		<div class="card">
+		<div v-if="naoCurados.length > 0" class="card">
 			<div class="card__img" :style="cardBackground" />
 			<div class="card__info">
 				<div class="card__title">{{filme.title || filme.name }}</div>
@@ -28,20 +28,32 @@
 				</div>
 			</div>
 		</div>
+		<div v-else class="card__sem-filme">
+			<div class="card__title">Sem filmes para votar</div>
+			<img src="@/assets/img/video-camera-vazio.png" alt="Sem filmes votar">
+		</div>
 	</section>
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
 export default {
 	name: "Filme",
 	props: {
 		filme: Object
 	},
 	computed: {
+		...mapGetters({ naoCurados: 'filmes/getNaoCurados' }),
 		cardBackground() {
-			return `
-					background-image: linear-gradient(to top, rgba(66, 66, 66, 0.99), rgba(0, 0, 0, 0)), url(https://image.tmdb.org/t/p/original${this.$props.filme.poster_path})
-      `
+			if (this.$props.filme) {
+				return `
+						background-image: linear-gradient(to top, rgba(66, 66, 66, 0.99), rgba(0, 0, 0, 0)), url(https://image.tmdb.org/t/p/original${this.$props.filme.poster_path})
+				`
+			} else {
+				return `
+						background-image: linear-gradient(to top, rgba(66, 66, 66, 0.99), rgba(0, 0, 0, 0))`
+
+			}
 		}
 	}
 }
@@ -117,5 +129,16 @@ export default {
 			text-align: right;
 		}
 	}
+	&__sem-filme {
+		background: rgba(0, 0, 0, 0.5);
+		border-radius: 3px;
+		text-align: center;
+		padding: 20px;
+
+		img {
+			margin-top: 16px;
+		}
+	}
 }
+
 </style>
