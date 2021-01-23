@@ -1,0 +1,13 @@
+@import './variables';
+@import './typography';
+
+body {
+  padding: 0;
+  margin: 0;
+  font-family: 'Open Sans', sans-serif;
+}
+
+a {
+  color: darken($color: $primary, $amount: 15);
+  font-weight: lighter;
+}
