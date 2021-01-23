@@ -16,3 +16,6 @@ export function mutateNaoCurtidos (state, payload) {
 export function mutateCurtidos (state, payload) {
     state.curtidos.push(payload)
 }
+export function mutateGeneros (state, payload) {
+    state.generos = payload
+}

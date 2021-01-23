@@ -30,7 +30,8 @@ export default {
 	computed: {
 		...mapGetters({
 			naoCurados: "filmes/getNaoCurados",
-			sinopse: "estados/getSinopse"
+			sinopse: "estados/getSinopse",
+			drawer: 'estados/getDrawer'
 			}),
 		poster() {
 			return this.naoCurados[0] ? this.naoCurados[0].poster_path : ""
@@ -43,6 +44,7 @@ export default {
 	},
 	mounted() {
 		this.getLista()
+		this.getGeneros()
 	},
 	methods: {
 		async getLista() {
@@ -50,9 +52,17 @@ export default {
 			this.setNaoCurados(data.results)
 			console.log(data.results)
 		},
+		async getGeneros() {
+			const { data } = await this.$axios.get(`https://api.themoviedb.org/3/genre/movie/list?api_key=${process.env.VUE_APP_API_KEY}`)
+			this.setGeneros(data)
+
+		},
 
 		// Store Actions
-		...mapActions({ setNaoCurados: "filmes/setNaoCurados" }),
+		...mapActions({
+			setNaoCurados: "filmes/setNaoCurados",
+			setGeneros: "filmes/setGeneros"
+		}),
 	},
 }
 </script>

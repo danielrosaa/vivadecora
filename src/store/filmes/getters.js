@@ -7,3 +7,6 @@ export function getNaoCurtidos (state) {
 export function getCurtidos (state) {
     return state.curtidos
 }
+export function getGeneros (state) {
+    return state.generos
+}

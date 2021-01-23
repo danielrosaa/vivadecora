@@ -1,6 +1,6 @@
 <template>
 	<section class="nav">
-		<div class="nav__menu">
+		<div @click="$store.dispatch('estados/setDrawer', !drawer)" class="nav__menu">
 			<img src="@/assets/img/menu-lateral.png" alt="Ícone do menu" />
 		</div>
 		<div class="nav__logo">
@@ -10,8 +10,12 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
 export default {
-  name: 'Navbar'  
+  name: 'Navbar',
+  computed: {
+    ...mapGetters({ drawer: 'estados/getDrawer' })
+  }  
 }
 </script>
 

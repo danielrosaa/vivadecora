@@ -7,3 +7,6 @@ export function setNaoCurtidos (context, payload) {
 export function setCurtidos (context, payload) {
     context.commit('mutateCurtidos', payload)
 }
+export function setGeneros (context, payload) {
+    context.commit('mutateGeneros', payload)
+}

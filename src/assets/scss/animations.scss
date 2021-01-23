@@ -1,12 +1,17 @@
-@keyframes dislike {
-  0% {}
+// Drawer animation
+@keyframes slide-in {
+  0% {
+    transform: translateX(-100%);
+  }
   100% {
-    transform: translateX(20px);
-    transform: rotate(-33deg);
-    opacity: 0;
+    transform: translateX(0);
   }
 }
-
-.animate--dislike {
-  animation: dislike 500ms;
+@keyframes slide-out {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
 }

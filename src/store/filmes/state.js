@@ -2,6 +2,7 @@ export default function () {
     return {
         naoCurados: [],
         naoCurtidos: [],
-        curtidos: []
+        curtidos: [],
+        generos: []
     }
 }

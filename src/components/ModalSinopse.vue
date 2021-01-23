@@ -9,7 +9,7 @@
       </div>
       <div class="modal__content">
         <div class="modal__titulo v-gutter-sm">{{filme.title || filme.name}}</div>
-        <div class="modal__info v-gutter-sm">2017 - FANTASY/SCIENCE FICTION FILM - 2H 21M</div>
+        <div class="modal__info v-gutter-sm">{{montaInfo}}</div>
         <div class="modal__avaliacao v-gutter-sm">
           <div class="modal__fav">
             <div class="modal__coracoes">
@@ -33,9 +33,35 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
 export default {
   props: {
     filme: Object
+  },
+  computed: {
+    ...mapGetters({generos: 'filmes/getGeneros' }),
+    montaInfo() {
+      return this.$props.filme.release_date.split('-')[0] + ' - ' + this.getGeneros() + ' FILM'
+    }
+  },
+  mounted() {
+    console.log("genres", this.generos)
+    this.getGeneros()
+    this.getDetails()
+  },
+  methods: {
+    getDetails() {
+      this.$axios.get(`https://api.themoviedb.org/3/movie/464052?api_key=${process.env.VUE_APP_API_KEY}&language=pt-BR`).then(response => {
+        console.log('detail', response.data)
+      })
+    },
+    getGeneros() {
+      let filteredGenres = []
+      this.$props.filme.genre_ids.map(genre => {
+        filteredGenres.push(this.generos.genres.filter(el => el.id === genre))
+      })
+      return filteredGenres.map((genre) => genre[0].name).join('/')
+    }
   }
   
 }
