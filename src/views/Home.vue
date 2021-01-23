@@ -1,8 +1,16 @@
 <template>
 	<div class="home">
+		<div class="bg-imagem-dinamica">
+			<img :src="`https://image.tmdb.org/t/p/original${this.lista.poster_path}`">
+		</div>
 		<Navbar />
-		<!-- <CardFilme :filme="lista" class="stack" /> -->
-		<CardFilme v-for="filme in lista" :key="filme.id" :filme="filme" class="stack" />
+		<CardFilme :filme="lista" />
+		<!-- <CardFilme
+			v-for="filme in lista"
+			:key="filme.id"
+			:filme="filme"
+			class="stack"
+		/> -->
 		<BotoesControle />
 	</div>
 </template>
@@ -20,6 +28,11 @@ export default {
 	},
 	computed: {
 		...mapGetters({ access_token: "token/getToken" }),
+		cardBackground() {
+			return `
+					background-image: url(https://image.tmdb.org/t/p/original${this.lista.poster_path});
+      `
+		},
 	},
 	data() {
 		return {
@@ -33,7 +46,7 @@ export default {
 	methods: {
 		async getLista() {
 			const { data } = await this.$axios.get("/list/7073183")
-			this.lista = data.results
+			this.lista = data.results[0]
 			console.log(this.lista)
 		},
 	},
@@ -44,26 +57,30 @@ export default {
 .home {
 	height: 100%;
 	box-sizing: border-box;
-	background-image: $gradient;
 	padding: 20px;
 	display: flex;
 	flex-direction: column;
 	justify-content: space-between;
 	position: relative;
+	background-repeat: no-repeat;
+	background-size: cover;
+	background-position: center;
+	background-image: $gradient;
+}
 
-	&::before {
-		content: "";
-		position: absolute;
-		top: 0;
-		left: 0;
-		width: 100%;
-		height: 100%;
-		background-image: $gradient, url("~@/assets/img/ww.png");
-		background-repeat: no-repeat;
-		background-size: cover;
-		background-position: center;
-		opacity: 0.2;
-		z-index: -1;
+.bg-imagem-dinamica {
+	position: absolute;
+	top: 50%;
+	z-index: -1;
+	left: 50%;
+	margin-right: -50%;
+	transform: translate(-50%, -50%);
+	
+
+	img {
+		width: auto;
+		height: 100vh;
+		opacity: 0.1;
 	}
 }
 </style>
