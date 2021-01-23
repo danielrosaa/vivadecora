@@ -8,7 +8,7 @@
         <div @click="$store.dispatch('estados/setSinopse', false)" class="modal__fechar">X</div>
       </div>
       <div class="modal__content">
-        <div class="modal__titulo v-gutter-sm">{{filme.title || filme.name}}</div>
+        <div class="title title--black v-gutter-sm">{{filme.title || filme.name}}</div>
         <div class="modal__info v-gutter-sm">{{montaInfo}}</div>
         <div class="modal__avaliacao v-gutter-sm">
           <div class="modal__fav">
@@ -74,21 +74,21 @@ export default {
   width: 100vw;
   height: 100vh;
   position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   top: 0;
   left: 0;
   background: rgba(0, 0, 0, 0.5);
-  display: grid;
-  place-items: center;
   z-index: 9999;
 
   &__card {
-    width: 80%;
-    height: 80%;
+    width: 90%;
+    height: 90%;
     display: flex;
     flex-direction: column;
     background: #fff;
     border-radius: 8px;
-    // overflow: hidden;
   }
   &__header {
     border-top-right-radius: 8px;
@@ -136,18 +136,11 @@ export default {
     color: #666;
   }
 
-	&__titulo {
-		text-transform: uppercase;
-		font-size: 1.4rem;
-    font-weight: 900;
-  }
-
   &__fav {
     display: flex;
     flex-direction: column;
 		align-content: center;
 		margin: 16px 0;
-		color: $cardTextColor;
     text-align: center;
     font-size: 0.9rem;
     font-weight: 500;

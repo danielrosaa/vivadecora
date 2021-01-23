@@ -3,8 +3,8 @@
 		<div class="bg-imagem-dinamica">
 			<img :src="`https://image.tmdb.org/t/p/original${poster}`" />
 		</div>
-		<div />
-		<CardFilme ref="cardFilme" :filme="naoCurados[0]" />
+		<div v-if="$route.path === '/'" />
+		<CardFilme ref="cardFilme" :filme="naoCurados[0]" height="350px" maxWidth="294px" />
 		<!-- <div class="lista">
 			<CardFilme v-for="filme in naoCurados" :key="filme.id" :filme="filme" class="lista__filme" />
 		</div> -->
@@ -46,9 +46,10 @@ export default {
 	},
 	methods: {
 		async getLista() {
-			const { data } = await this.$axios.get("/list/7073183")
-			this.setNaoCurados(data.results)
-			console.log(data.results)
+			if (this.naoCurados.length === 0) {
+				const { data } = await this.$axios.get("/list/7073183")
+				this.setNaoCurados(data.results)
+			}
 		},
 		async getGeneros() {
 			const { data } = await this.$axios.get(`https://api.themoviedb.org/3/genre/movie/list?api_key=${process.env.VUE_APP_API_KEY}`)
@@ -78,6 +79,7 @@ export default {
 	background-size: cover;
 	background-position: center;
 	overflow-x: hidden;
+  background-image: $gradient;
 }
 
 .bg-imagem-dinamica {

@@ -1,8 +1,8 @@
 <template>
   <div class="app">
-		<Navbar class="navbar" />
+		<Navbar />
     <Drawer ref="drawer" class="drawer" />
-    <router-view ref="view" class="view"/>
+    <router-view ref="view" class="view" />
   </div>
 </template>
 <script>
@@ -39,13 +39,10 @@ export default {
   height: 100vh;
   display: flex;
   flex-direction: column;
-  background-image: $gradient;
-}
-
-.navbar {
 }
 
 .view {
+  padding: 10px;
 }
 
 .drawer {

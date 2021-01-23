@@ -1,5 +1,5 @@
 <template>
-	<section class="nav">
+	<section class="nav" :style="$route.path === '/' ? 'position: absolute; background: transparent' : null" >
 		<div @click="$store.dispatch('estados/setDrawer', !drawer)" class="nav__menu">
 			<img src="@/assets/img/menu-lateral.png" alt="Ícone do menu" />
 		</div>
@@ -28,8 +28,8 @@ export default {
   justify-content: center;
   align-items: center;
   margin: 0 auto;
-  position: absolute;
   z-index: 1;
+  background: $secondary;
   &__menu {
     position: absolute;
     left: 20px;

@@ -1,9 +1,14 @@
 <template>
 	<section class="filmes">
-		<div v-if="naoCurados.length > 0" class="card">
+		<div
+			v-if="naoCurados.length > 0 || !checaRota"
+			class="card"
+			:style="cardSize"
+			ref="card"
+		>
 			<div class="card__img" :style="cardBackground" />
 			<div class="card__info">
-				<div class="card__title">{{ filme.title || filme.name }}</div>
+				<div :style="fontSize" class="title title--white">{{ filme.title || filme.name }}</div>
 				<div class="card__fav">
 					<div class="card__coracoes">
 						<img
@@ -14,11 +19,11 @@
 						/>
 						<img src="@/assets/img/favorite_.png" alt="Ícone de favorito" />
 					</div>
-					<div class="card__avaliacoes">
+					<div v-if="checaRota" class="card__avaliacoes">
 						({{ filme.vote_count }} avaliações)
 					</div>
 				</div>
-				<div class="card__sinopse">
+				<div v-if="checaRota" class="card__sinopse">
 					<div>
 						{{ filme.overview }}
 					</div>
@@ -28,10 +33,12 @@
 				</div>
 			</div>
 		</div>
-		<div v-else class="card__sem-filme">
-			<div class="card__title">Sem filmes para votar</div>
-			<img src="@/assets/img/video-camera-vazio.png" alt="Sem filmes votar" />
-		</div>
+		<template v-if="checaRota">
+			<div v-if="naoCurados.length === 0" class="card__sem-filme">
+				<div class="title title--white">Sem filmes para votar</div>
+				<img src="@/assets/img/video-camera-vazio.png" alt="Sem filmes votar" />
+			</div>
+		</template>
 	</section>
 </template>
 
@@ -41,11 +48,18 @@ export default {
 	name: "Filme",
 	props: {
 		filme: Object,
+		height: String,
+		width: String,
+		maxWidth: String,
+		textSize: String
 	},
 	computed: {
 		...mapGetters({
 			naoCurados: "filmes/getNaoCurados",
 		}),
+		checaRota() {
+			return this.$route.path === '/'
+		},
 		cardBackground() {
 			if (this.$props.filme) {
 				return `
@@ -55,6 +69,16 @@ export default {
 				return `
 						background-image: linear-gradient(to top, rgba(66, 66, 66, 0.99), rgba(0, 0, 0, 0))`
 			}
+		},
+		cardSize() {
+			return `
+				width: ${this.$props.width || null };
+				max-width: ${this.$props.maxWidth || null };
+				height: ${this.$props.height || null };
+			`
+		},
+		fontSize() {
+			return `font-size: ${this.$props.textSize}`
 		}
 	}
 }
@@ -66,8 +90,6 @@ export default {
 }
 .card {
 	width: 100%;
-	max-width: 294px;
-	height: 350px;
 	margin: 0 auto;
 	border-radius: 3px;
 	display: flex;
@@ -95,13 +117,6 @@ export default {
 		font-size: 0.9rem;
 	}
 
-	&__title {
-		text-transform: uppercase;
-		font-size: 1.4rem;
-		color: #fff;
-		font-weight: 900;
-	}
-
 	&__fav {
 		display: flex;
 		justify-content: space-between;
@@ -112,9 +127,11 @@ export default {
 
 	&__coracoes {
 		img {
-			width: 18px;
-			height: 18px;
-			margin-right: 5px;
+			width: 15px;
+			height: 15px;
+			&:not(:last-child) {
+				margin-right: 5px;
+			}
 		}
 	}
 
@@ -140,6 +157,8 @@ export default {
 		padding: 20px;
 
 		img {
+			width: 70%;
+			height: auto;
 			margin-top: 16px;
 		}
 	}
