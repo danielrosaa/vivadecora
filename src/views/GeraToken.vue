@@ -15,6 +15,7 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex'
 export default {
   name: 'Home',
   mounted() {
@@ -27,6 +28,7 @@ export default {
     }
   },
   methods: {
+    ...mapActions({setToken: 'token/setToken'}),
     criarLista() {
       this.$axios.post('/list', {
         name: this.nomeLista,
@@ -50,6 +52,8 @@ export default {
           request_token: this.request_token
         })
         this.access_token = data.access_token
+        this.setToken(this.access_token)
+        this.$router.push('/')
       } catch (error) {
         if (error.response.status === 422) console.log('Error', error.response.data.errors)
       }

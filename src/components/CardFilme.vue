@@ -3,7 +3,7 @@
 		<div class="card">
 			<div class="card__img" :style="cardBackground" />
 			<div class="card__info">
-				<div class="card__title">Wonder Woman</div>
+				<div class="card__title">{{filme.title || filme.name }}</div>
 				<div class="card__fav">
 					<div class="card__coracoes">
 						<img
@@ -15,15 +15,12 @@
 						<img src="@/assets/img/favorite_.png" alt="Ícone de favorito" />
 					</div>
 					<div class="card__avaliacoes">
-						(120 avaliações)
+						({{filme.vote_count}} avaliações)
 					</div>
 				</div>
 				<div class="card__sinopse">
 					<div>
-						Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusantium
-						perspiciatis voluptatibus consectetur distinctio nostrum velit sunt
-						ex deleniti fuga vel eveniet, laudantium iste cupiditate, natus
-						quibusdam unde ad quisquam perferendis.
+						{{filme.overview}}
 					</div>
 					<div>
 						<a href="#">Ver Sinopse</a>
@@ -37,13 +34,16 @@
 <script>
 export default {
 	name: "Filme",
-	data() {
-		return {
-			cardBackground: `
-					background-image: linear-gradient(to top, rgba(66, 66, 66, 0.99), rgba(0, 0, 0, 0)), url(${require("@/assets/img/ww.png")})
-      `,
-		}
+	props: {
+		filme: Object
 	},
+	computed: {
+		cardBackground() {
+			return `
+					background-image: linear-gradient(to top, rgba(66, 66, 66, 0.99), rgba(0, 0, 0, 0)), url(https://image.tmdb.org/t/p/original${this.$props.filme.poster_path})
+      `
+		}
+	}
 }
 </script>
 
@@ -53,7 +53,6 @@ export default {
 	max-width: 294px;
 	height: 350px;
 	margin: 0 auto;
-	// background: black;
 	border-radius: 3px;
 	display: flex;
 	flex-direction: column;
@@ -70,6 +69,7 @@ export default {
 		filter: saturate(80%);
 		background-repeat: no-repeat;
 		background-size: cover;
+		background-position: top;
 	}
 
 	&__info {

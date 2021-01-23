@@ -1,21 +1,42 @@
 <template>
 	<div class="home">
 		<Navbar />
-		<Filme />
+		<!-- <CardFilme :filme="lista" class="stack" /> -->
+		<CardFilme v-for="filme in lista" :key="filme.id" :filme="filme" class="stack" />
 		<BotoesControle />
 	</div>
 </template>
 
 <script>
 import Navbar from "@/components/Navbar"
-import Filme from "@/components/Filme"
+import CardFilme from "@/components/CardFilme"
 import BotoesControle from "@/components/BotoesControle"
+import { mapGetters } from "vuex"
 export default {
 	components: {
 		Navbar,
-		Filme,
-		BotoesControle
-	}
+		CardFilme,
+		BotoesControle,
+	},
+	computed: {
+		...mapGetters({ access_token: "token/getToken" }),
+	},
+	data() {
+		return {
+			poster: "",
+			lista: {},
+		}
+	},
+	mounted() {
+		this.getLista()
+	},
+	methods: {
+		async getLista() {
+			const { data } = await this.$axios.get("/list/7073183")
+			this.lista = data.results
+			console.log(this.lista)
+		},
+	},
 }
 </script>
 
@@ -31,13 +52,13 @@ export default {
 	position: relative;
 
 	&::before {
-		content: '';
+		content: "";
 		position: absolute;
 		top: 0;
 		left: 0;
 		width: 100%;
 		height: 100%;
-		background-image: $gradient, url('~@/assets/img/ww.png');
+		background-image: $gradient, url("~@/assets/img/ww.png");
 		background-repeat: no-repeat;
 		background-size: cover;
 		background-position: center;

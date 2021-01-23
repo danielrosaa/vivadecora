@@ -19,6 +19,11 @@ const routes = [
     path: '/likes',
     name: 'Filmes curtidos',
     component: () => import(/* webpackChunkName: "about" */ '../views/Likes.vue')
+  },
+  {
+    path: '/token',
+    name: 'Gera Token',
+    component: () => import(/* webpackChunkName: "about" */ '../views/GeraToken.vue')
   }
 ]
 
