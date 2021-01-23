@@ -11,3 +11,22 @@ a {
   color: darken($color: $primary, $amount: 15);
   font-weight: lighter;
 }
+
+.btn {
+  background: #FFF;
+  text-transform: uppercase;
+  padding: 15px 10px;
+  border-radius: 100px;
+  border: 0;
+  font-family: 'Open Sans', sans-serif;
+  &:not(.btn--round) {
+    min-width: 80px;
+    font-weight: 700;
+  }
+
+  &--round {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+  }
+}
