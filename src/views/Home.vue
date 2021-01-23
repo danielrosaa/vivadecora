@@ -3,6 +3,7 @@
 		<div class="bg-imagem-dinamica">
 			<img :src="`https://image.tmdb.org/t/p/original${poster}`" />
 		</div>
+		<div />
 		<CardFilme ref="cardFilme" :filme="naoCurados[0]" />
 		<!-- <div class="lista">
 			<CardFilme v-for="filme in naoCurados" :key="filme.id" :filme="filme" class="lista__filme" />
@@ -76,7 +77,6 @@ export default {
 	background-repeat: no-repeat;
 	background-size: cover;
 	background-position: center;
-	// background-image: $gradient;
 	overflow-x: hidden;
 }
 
