@@ -72,11 +72,4 @@ export default {
   justify-content: center;
 }
 
-@media screen and (min-width: $breakpoint) {
-  .view {
-    padding: 24px 100px;
-    height: 100%;
-  }
-}
-
 </style>

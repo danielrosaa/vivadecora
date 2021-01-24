@@ -6,7 +6,11 @@
 			:class="clientWidth < 500 ? 'btn--round' : 'btn--icon'"
 			:disabled="naoCurados.length === 0"
 		>
-			<img src="@/assets/img/n-curti.png" alt="Ícone de curtir" class="btn__img btn__img--nao-curti" />
+			<img
+				src="@/assets/img/n-curti.png"
+				alt="Ícone de curtir"
+				class="btn__img btn__img--nao-curti"
+			/>
 			<div v-if="clientWidth > 500">Não curti!</div>
 		</button>
 		<button @click="pular" class="btn" :disabled="naoCurados.length === 0">
@@ -18,45 +22,48 @@
 			:class="clientWidth < 500 ? 'btn--round' : 'btn--icon red'"
 			:disabled="naoCurados.length === 0"
 		>
-			<img src="@/assets/img/curti.png" alt="Ícone de descurtir" class="btn__img btn__img--curti"/>
+			<img
+				src="@/assets/img/curti.png"
+				alt="Ícone de descurtir"
+				class="btn__img btn__img--curti"
+			/>
 			<div v-if="clientWidth > 500">Curti!</div>
 		</button>
 	</section>
 </template>
 
 <script>
-import { mapGetters, mapActions } from 'vuex'
+import { mapGetters, mapActions } from "vuex"
 export default {
-  name: "Navbar",
-  props: {
-    filme: Object
-  },
-  computed: {
-    ...mapGetters({
-			naoCurados: 'filmes/getNaoCurados',
-			clientWidth: 'estados/getClientWidth'
-		})
-  },
+	name: "Navbar",
+	props: {
+		filme: Object,
+	},
+	computed: {
+		...mapGetters({
+			naoCurados: "filmes/getNaoCurados",
+			clientWidth: "estados/getClientWidth",
+		}),
+	},
 	methods: {
 		dislike() {
 			this.setNaoCurtidos(this.$props.filme)
-			this.setNaoCurados({filme: this.$props.filme, acao: 'remover'})
+			this.setNaoCurados({ filme: this.$props.filme, acao: "remover" })
 		},
 		pular() {
-			this.setNaoCurados({filme: this.$props.filme, acao: 'pular'})
+			this.setNaoCurados({ filme: this.$props.filme, acao: "pular" })
 		},
 		like() {
 			this.setCurtidos(this.$props.filme)
-			this.setNaoCurados({filme: this.$props.filme, acao: 'remover'})
-    },
+			this.setNaoCurados({ filme: this.$props.filme, acao: "remover" })
+		},
 
-    // Store Actions
-    ...mapActions({
-        setNaoCurados: 'filmes/setNaoCurados',
-        setCurtidos: 'filmes/setCurtidos',
-        setNaoCurtidos: 'filmes/setNaoCurtidos'
-      }
-    )
+		// Store Actions
+		...mapActions({
+			setNaoCurados: "filmes/setNaoCurados",
+			setCurtidos: "filmes/setCurtidos",
+			setNaoCurtidos: "filmes/setNaoCurtidos",
+		}),
 	},
 }
 </script>
@@ -71,15 +78,6 @@ export default {
 img {
 	width: 28px;
 	height: 28px;
-}
-
-.btn__img {
-	&--nao-curti {
-		margin-top: 10px;
-	}
-	&--curti {
-		margin-bottom: 10px;
-	}
 }
 
 .red {

@@ -12,6 +12,7 @@ body {
 a {
   color: darken($color: $primary, $amount: 15);
   font-weight: lighter;
+  text-decoration: underline;
 }
 
 ul {
@@ -37,6 +38,15 @@ ul {
   transition: 300ms all;
   &:not(.btn--round) {
     font-weight: 700;
+  }
+
+  &__img {
+    &--nao-curti {
+      margin-top: 10px;
+    }
+    &--curti {
+      margin-bottom: 10px;
+    }
   }
 
   &:active {
@@ -69,7 +79,6 @@ ul {
 }
 
 .title {
-  font-size: 1.4rem;
   font-weight: 900;
   text-transform: uppercase;
   &--black {
@@ -77,5 +86,13 @@ ul {
   }
   &--white {
     color: #FFF;
+  }
+}
+
+// Desktop
+@media (min-width: $breakpoint) {
+  .view {
+    padding: 24px 100px;
+    height: 100%;
   }
 }

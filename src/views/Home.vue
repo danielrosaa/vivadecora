@@ -5,9 +5,7 @@
 		</div>
 		<div v-if="$route.path === '/'" />
 		<CardFilme ref="cardFilme" :filme="naoCurados[0]" height="350px" maxWidth="294px" />
-		<!-- <div class="lista">
-			<CardFilme v-for="filme in naoCurados" :key="filme.id" :filme="filme" class="lista__filme" />
-		</div> -->
+		
 		<BotoesControle :filme="naoCurados[0]" />
 
 		<ModalSinopse v-if="sinopse.abre" :filme="naoCurados[0]" />
@@ -101,25 +99,6 @@ export default {
 	}
 }
 
-@media screen and (min-width: $breakpoint) {
-	.bg-imagem-dinamica {
-		img {
-			width: 100vw;
-			height: auto;
-		}
-	}
-}
+@import '@/assets/scss/desktop';
 
-// .lista {
-// 	position: relative;
-// 	display: flex;
-// 	justify-content: center;
-// 	align-items: center;
-// 	width: 100%;
-// 	height: 100%;
-// 	&__filme {
-// 		position: absolute;
-// 		z-index: 1;
-// 	}
-// }
 </style>

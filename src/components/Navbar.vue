@@ -38,29 +38,9 @@ export default {
   &__menu {
     position: absolute;
     left: 20px;
-    //
-  }
-  &__logo {
-    //
   }
 }
-@media screen and (max-width: $breakpoint) {
-  .lista-rotas {
-    display: none;
-  }
-}
-@media screen and (min-width: $breakpoint) {
-  .nav {
-    display: flex;
-    flex-direction: column;
-    position: relative;
-    &__menu {
-      display: none;
-    }
-  }
 
-  .lista-rotas {
-    width: 60%;
-  }
-}
+@import '@/assets/scss/desktop';
+
 </style>

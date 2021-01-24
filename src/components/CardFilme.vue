@@ -8,7 +8,7 @@
 		>
 			<div class="card__img" :style="cardBackground" />
 			<div class="card__info">
-				<div :style="fontSize" class="title title--white">
+				<div class="card__title title--white">
 					{{ filme.title || filme.name }}
 				</div>
 				<div v-if="clientWidth > 500" class="card__genero card__sinopse v-gutter-sm">{{ montaInfo }}</div>
@@ -134,7 +134,10 @@ export default {
 		background-size: cover;
 		background-position: top;
 	}
-
+	&__title {
+		font-size: 1.4rem;
+		text-transform: uppercase;
+	}
 	&__info {
 		padding: 20px;
 		z-index: 1;
@@ -188,17 +191,6 @@ export default {
 		}
 	}
 }
-
-// .swipe-enter-active {
-//   transition: all 1s ease;
-// }
-// .swipe-leave-active {
-//   transition: all .8s cubic-bezier(1.0, 0.5, 0.8, 1.0);
-// }
-// .swipe-leave-to {
-//   transform: translateY(10px);
-//   opacity: 0;
-// }
 
 @media screen and (min-width: $breakpoint) {
 	.card {

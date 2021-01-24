@@ -1,0 +1,43 @@
+.card-list {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-between;
+}
+
+.card-filme /deep/ .card {
+	align-items: center;
+	&__title {
+		font-size: 0.8rem;
+	}
+	&__info {
+		padding: 5px;
+	}
+	&__fav {
+		justify-content: center;
+		margin: 5px 0;
+	}
+}
+
+// Classe presente em CardFilmes
+.filmes {
+	margin-bottom: 10px;
+	.card__fav {
+		margin: 0;
+	}
+}
+
+.sem-filme {
+	height: 100%;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+
+	img {
+		width: 40%;
+		height: auto;
+	}
+	.title {
+		margin-top: 48px;
+	}
+}
