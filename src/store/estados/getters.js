@@ -4,3 +4,6 @@ export function getSinopse (state) {
 export function getDrawer (state) {
     return state.drawer
 }
+export function getClientWidth (state) {
+    return state.clientWidth
+}

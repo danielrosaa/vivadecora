@@ -37,8 +37,6 @@ export default {
         headers: {
           Authorization: 'Bearer ' + this.access_token
         }
-      }).then(({ data }) => {
-        console.log(data)
       })
     },
     async requestToken() {

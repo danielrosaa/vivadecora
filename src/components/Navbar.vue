@@ -1,18 +1,23 @@
 <template>
-	<section class="nav" :style="$route.path === '/' ? 'position: absolute; background: transparent' : null" >
+	<nav class="nav" :style="$route.path === '/' ? 'position: absolute; background: transparent' : null" >
 		<div @click="$store.dispatch('estados/setDrawer', !drawer)" class="nav__menu">
 			<img src="@/assets/img/menu-lateral.png" alt="Ícone do menu" />
 		</div>
 		<div class="nav__logo">
 			<img src="@/assets/img/logo-viva-decora.png" alt="Logo da Viva Decora" />
 		</div>
-	</section>
+    <ListaRotas class="lista-rotas" />
+	</nav>
 </template>
 
 <script>
 import { mapGetters } from 'vuex'
+import ListaRotas from '@/components/ListaRotas'
 export default {
   name: 'Navbar',
+  components: {
+    ListaRotas
+  },
   computed: {
     ...mapGetters({ drawer: 'estados/getDrawer' })
   }  
@@ -37,6 +42,25 @@ export default {
   }
   &__logo {
     //
+  }
+}
+@media screen and (max-width: $breakpoint) {
+  .lista-rotas {
+    display: none;
+  }
+}
+@media screen and (min-width: $breakpoint) {
+  .nav {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    &__menu {
+      display: none;
+    }
+  }
+
+  .lista-rotas {
+    width: 60%;
   }
 }
 </style>

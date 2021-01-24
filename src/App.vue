@@ -28,6 +28,17 @@ export default {
         this.$refs.drawer.$el.style.transform = 'translateX(-100%)'
       }
     }
+  },
+  created() {
+    window.addEventListener('resize', this.setClientWidth)
+  },
+  destroyed() {
+    window.removeEventListener('resize')
+  },
+  methods: {
+    setClientWidth() {
+      this.$store.dispatch('estados/setClientWidth', window.innerWidth)
+    }
   }
 }
 </script>
@@ -59,6 +70,13 @@ export default {
   display: flex;
   flex-direction: column;
   justify-content: center;
+}
+
+@media screen and (min-width: $breakpoint) {
+  .view {
+    padding: 24px 100px;
+    height: 100%;
+  }
 }
 
 </style>

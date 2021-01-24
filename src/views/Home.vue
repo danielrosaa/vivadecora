@@ -10,7 +10,7 @@
 		</div> -->
 		<BotoesControle :filme="naoCurados[0]" />
 
-		<ModalSinopse v-if="sinopse" :filme="naoCurados[0]" />
+		<ModalSinopse v-if="sinopse.abre" :filme="naoCurados[0]" />
 	</div>
 </template>
 
@@ -47,7 +47,11 @@ export default {
 	methods: {
 		async getLista() {
 			if (this.naoCurados.length === 0) {
-				const { data } = await this.$axios.get("/list/7073183")
+				const { data } = await this.$axios.get("/list/7073183", {
+					params: {
+						language: 'pt-BR'
+					}
+				})
 				this.setNaoCurados(data.results)
 			}
 		},
@@ -68,7 +72,7 @@ export default {
 
 <style lang="scss" scoped>
 .home {
-	height: 100%;
+	height: 100vh;
 	box-sizing: border-box;
 	padding: 20px;
 	display: flex;
@@ -78,7 +82,7 @@ export default {
 	background-repeat: no-repeat;
 	background-size: cover;
 	background-position: center;
-	overflow-x: hidden;
+	overflow: hidden;
   background-image: $gradient;
 }
 
@@ -94,6 +98,15 @@ export default {
 		width: auto;
 		height: 100vh;
 		opacity: 0.1;
+	}
+}
+
+@media screen and (min-width: $breakpoint) {
+	.bg-imagem-dinamica {
+		img {
+			width: 100vw;
+			height: auto;
+		}
 	}
 }
 

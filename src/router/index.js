@@ -7,8 +7,8 @@ Vue.use(VueRouter)
 const routes = [
   {
     path: '/',
-    name: 'Home',
-    component: Home
+    name: 'Filmes não curados',
+    component: Home,
   },
   {
     path: '/dislikes',
@@ -20,11 +20,11 @@ const routes = [
     name: 'Filmes curtidos',
     component: () => import(/* webpackChunkName: "about" */ '../views/Likes.vue')
   },
-  {
-    path: '/token',
-    name: 'Gera Token',
-    component: () => import(/* webpackChunkName: "about" */ '../views/GeraToken.vue')
-  }
+  // {
+  //   path: '/token',
+  //   name: 'Gera Token',
+  //   component: () => import(/* webpackChunkName: "about" */ '../views/GeraToken.vue')
+  // }
 ]
 
 const router = new VueRouter({

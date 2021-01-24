@@ -2,20 +2,24 @@
 	<section class="controle">
 		<button
 			@click="dislike"
-			class="btn btn--round"
+			class="btn"
+			:class="clientWidth < 500 ? 'btn--round' : 'btn--icon'"
 			:disabled="naoCurados.length === 0"
 		>
-			<img src="@/assets/img/n-curti.png" alt="Ícone de curtir" />
+			<img src="@/assets/img/n-curti.png" alt="Ícone de curtir" class="btn__img btn__img--nao-curti" />
+			<div v-if="clientWidth > 500">Não curti!</div>
 		</button>
 		<button @click="pular" class="btn" :disabled="naoCurados.length === 0">
 			Pular
 		</button>
 		<button
 			@click="like"
-			class="btn btn--round"
+			class="btn"
+			:class="clientWidth < 500 ? 'btn--round' : 'btn--icon red'"
 			:disabled="naoCurados.length === 0"
 		>
-			<img src="@/assets/img/curti.png" alt="Ícone de descurtir" />
+			<img src="@/assets/img/curti.png" alt="Ícone de descurtir" class="btn__img btn__img--curti"/>
+			<div v-if="clientWidth > 500">Curti!</div>
 		</button>
 	</section>
 </template>
@@ -28,7 +32,10 @@ export default {
     filme: Object
   },
   computed: {
-    ...mapGetters({ naoCurados: 'filmes/getNaoCurados' })
+    ...mapGetters({
+			naoCurados: 'filmes/getNaoCurados',
+			clientWidth: 'estados/getClientWidth'
+		})
   },
 	methods: {
 		dislike() {
@@ -59,5 +66,23 @@ export default {
 	display: flex;
 	align-items: center;
 	justify-content: space-around;
+}
+
+img {
+	width: 28px;
+	height: 28px;
+}
+
+.btn__img {
+	&--nao-curti {
+		margin-top: 10px;
+	}
+	&--curti {
+		margin-bottom: 10px;
+	}
+}
+
+.red {
+	color: $secondary;
 }
 </style>
