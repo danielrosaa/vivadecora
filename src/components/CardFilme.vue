@@ -1,10 +1,9 @@
 <template>
-	<section class="filmes">
+	<section class="filmes" ref="filmes">
 		<div
 			v-if="naoCurados.length > 0 || !checaRota"
 			class="card"
 			:style="cardSize"
-			ref="card"
 		>
 			<div class="card__img" :style="cardBackground" />
 			<div class="card__info">
@@ -97,6 +96,15 @@ export default {
 			return `font-size: ${this.$props.textSize}`
 		},
 	},
+	watch: {
+		filme() {
+			// Adiciona e remove a classe que anima o card cada vez que troca o filme
+			this.$refs.filmes.classList.add('fade-in')
+			setTimeout(() => {
+				this.$refs.filmes.classList.remove('fade-in')
+			}, 300); // Este valor deve ser igual ao tempo da animação
+		}
+	},
 	methods: {
 		formataGeneros() {
 			let filteredGenres = []
@@ -111,7 +119,7 @@ export default {
 
 <style lang="scss" scoped>
 .filmes {
-	transition: all;
+	transition: all 500ms;
 }
 .card {
 	width: 100%;

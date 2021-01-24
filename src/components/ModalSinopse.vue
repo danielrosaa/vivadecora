@@ -1,6 +1,6 @@
 <template>
 	<div ref="modal" class="modal" :style="`top: ${clientHeight}`">
-		<div class="modal__card">
+		<div class="modal__card fade-in">
 			<div class="modal__header">
 				<div class="modal__image">
 					<img

@@ -13,7 +13,7 @@
 			/>
 			<div v-if="clientWidth > 500">Não curti!</div>
 		</button>
-		<button @click="pular" class="btn" :disabled="naoCurados.length === 0">
+		<button @click="pular" class="btn" :disabled="naoCurados.length <= 1" >
 			Pular
 		</button>
 		<button

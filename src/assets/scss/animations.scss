@@ -1,17 +1,32 @@
 // Drawer animation
 @keyframes slide-in {
-  0% {
-    transform: translateX(-100%);
-  }
-  100% {
-    transform: translateX(0);
-  }
+	0% {
+		transform: translateX(-100%);
+	}
+	100% {
+		transform: translateX(0);
+	}
 }
 @keyframes slide-out {
-  0% {
-    transform: translateX(0);
-  }
-  100% {
-    transform: translateX(-100%);
-  }
+	0% {
+		transform: translateX(0);
+	}
+	100% {
+		transform: translateX(-100%);
+	}
+}
+
+@keyframes fade-in {
+	0% {
+    transform: translateY(-40px) rotate3d(15, 0, 0, 50deg) ;
+		opacity: 0;
+	}
+	100% {
+    transform: translateY(0) rotate3d(0, 0, 0, 0deg);
+		opacity: 1;
+	}
+}
+
+.fade-in {
+  animation: fade-in 300ms;
 }
