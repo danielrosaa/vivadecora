@@ -1,5 +1,6 @@
-# vivadecora
-
+# VivaDecora: projeto de teste para vaga de desenvolvedor front-end
+##### Link em produção:
+https://competent-lovelace-7dfa93.netlify.app/
 ## Project setup
 ```
 yarn install
@@ -14,11 +15,3 @@ yarn serve
 ```
 yarn build
 ```
-
-### Lints and fixes files
-```
-yarn lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
