@@ -3,8 +3,8 @@
 		<div class="bg-imagem-dinamica">
 			<img :src="`https://image.tmdb.org/t/p/original${poster}`" />
 		</div>
-		<div v-if="$route.path === '/'" />
-		<CardFilme ref="cardFilme" :filme="naoCurados[0]" height="350px" maxWidth="294px" />
+		<br /> 
+		<CardFilme :filme="naoCurados[0]" height="350px" maxWidth="294px" />
 		
 		<BotoesControle :filme="naoCurados[0]" />
 
