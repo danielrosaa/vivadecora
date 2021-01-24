@@ -6,8 +6,8 @@
 				v-for="filme in curtidos"
 				:key="filme.id"
 				:filme="filme"
-				:height="clientWidth > 321 ? '350px' : '174px'"
-				:width="clientWidth > 321 ? '294px' : '145px'"
+				:width="clientWidth > 500 ? '294px' : '145px'"
+				:height="clientWidth > 500 ? '350px' : '174px'"
 				textSize="0.7rem"
 				class="card-filme"
 			/>

@@ -11,7 +11,7 @@
 				<div :style="fontSize" class="title title--white">
 					{{ filme.title || filme.name }}
 				</div>
-				<div v-if="clientWidth > 321" class="card__genero card__sinopse v-gutter-sm">{{ montaInfo }}</div>
+				<div v-if="clientWidth > 500" class="card__genero card__sinopse v-gutter-sm">{{ montaInfo }}</div>
 				<div class="card__fav">
 					<div class="card__coracoes">
 						<img
@@ -22,12 +22,12 @@
 						/>
 						<img src="@/assets/img/favorite_.png" alt="Ícone de favorito" />
 					</div>
-					<div v-if="checaRota || clientWidth > 321" class="card__avaliacoes">
+					<div v-if="checaRota || clientWidth > 500" class="card__avaliacoes">
 						({{ filme.vote_count }} avaliações)
 					</div>
 				</div>
 				<!-- <div v-else></div> -->
-				<div v-if="checaRota  || clientWidth > 321" class="card__sinopse">
+				<div v-if="checaRota  || clientWidth > 500" class="card__sinopse">
 					<div>
 						{{ filme.overview }}
 					</div>
