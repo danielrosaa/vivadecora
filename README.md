@@ -1,6 +1,6 @@
 # VivaDecora: projeto de teste para vaga de desenvolvedor front-end
 ##### Link em produção:
-https://competent-lovelace-7dfa93.netlify.app/
+https://vivadecora-danielrosa.netlify.app/
 ## Project setup
 ```
 yarn install
